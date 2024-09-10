@@ -51,7 +51,7 @@ public class SphereManager : MonoBehaviour
             {
                 // Make one single instance of the prefab!
                 // This clones the prefab and places it in the hierarchy.
-                // Returns a reference to the cloned game object
+                // Returns a reference to the cloned game object.
                 prefabInstance = Instantiate(
                     prefabRef,                                              // Which prefab?
                     new Vector3(UnityEngine.Random.Range(-8f, 8f), 0, 0),   // Where is it spawned?

@@ -23,6 +23,20 @@ public class Jumper : MonoBehaviour
     /// </summary>
     public float jumpForce;
 
+    /// <summary>
+    /// Reference to a Rigidbody component on THIS game object
+    /// </summary>
+    [SerializeField]
+    private Rigidbody2D rbody;
+
+    /// <summary>
+    /// How often the ball will jump, in seconds
+    /// </summary>
+    public int timeToJump;
+
+    // Don't want to see this in the Inspector or modify it
+    private float timer = 0f;
+
 
     // ------------------------------------------------------------------------
     // Auto-Called methods in Unity
@@ -30,14 +44,26 @@ public class Jumper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Nothing here!
+        //rbody = GetComponent<Rigidbody2D>();
+        //Jumping();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Every frame, the object will jump.
-        Jumping();
+        // Every 5 seconds the ball will jump
+
+        // Add time elapsed to the timer variable
+        // When it's passed timetoJump, the ball will jump
+        //   and the timer will be "reset"
+        timer += Time.deltaTime;
+
+        if(timer > timeToJump)
+        {
+            Jumping();
+
+            timer -= timeToJump;
+        }
     }
 
 
@@ -55,6 +81,8 @@ public class Jumper : MonoBehaviour
 
         // Get the RB component on this game object, then add a force in a specific direction
         // We'll shorten this with "shortcuts" next class
-        gameObject.GetComponent<Rigidbody2D>().AddForce(jumpVector);
+        //gameObject.GetComponent<Rigidbody2D>().AddForce(jumpVector);
+        //GetComponent<Rigidbody2D>().AddForce(jumpVector);
+        rbody.AddForce(jumpVector);
     }
 }

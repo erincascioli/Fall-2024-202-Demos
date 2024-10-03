@@ -1,0 +1,54 @@
+{
+    "name": "Spawning",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "d9b7e1b3-9636-4184-a11f-aa97bd8fe81b",
+            "actions": [
+                {
+                    "name": "Spawn",
+                    "type": "Button",
+                    "id": "690bf01b-ad57-41d2-a43d-8f5fd0c60271",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Despawn",
+                    "type": "Button",
+                    "id": "effb837b-ef75-4971-a258-acabbe3c5ee4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "70f68122-e219-4c79-a68d-e09a10446405",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b35375fa-eb23-400e-9b01-9ecbf969d6c2",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Despawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

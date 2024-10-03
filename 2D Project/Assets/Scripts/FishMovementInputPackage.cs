@@ -38,7 +38,7 @@ public class FishMovementInputPackage : MonoBehaviour
             UnityEngine.Debug.Log("Swimming?");
             //fishGO.GetComponent<FishMovement>().SwimRight();
 
-            fishGO.GetComponent<FishMovement>().Swim( some vector2 );
+            //fishGO.GetComponent<FishMovement>().Swim();
         }
 
         if (context.phase == InputActionPhase.Canceled)     // Canceled = Release

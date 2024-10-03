@@ -1,0 +1,65 @@
+{
+    "name": "Swimming",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "b58a3030-5e8a-4d14-a9bf-2179ec39a8b5",
+            "actions": [
+                {
+                    "name": "Swim Right",
+                    "type": "Button",
+                    "id": "63a3534e-4aa6-43b4-9a8c-68486268e7e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Swim Left",
+                    "type": "Button",
+                    "id": "777a6134-447c-451c-852d-3169b326119f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "09f1978d-4ae2-4fa4-9b4a-db7a816db710",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swim Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f6abc4b-2483-4098-9a56-3ad5fb452bfc",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swim Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85d0713d-58e1-47f9-9a78-8f8d0c8c95b5",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swim Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

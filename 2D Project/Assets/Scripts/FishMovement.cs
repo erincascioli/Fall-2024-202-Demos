@@ -30,7 +30,7 @@ public class FishMovement : MonoBehaviour
     void Update()
     {
         // Start by moving fish independently on X or Y axis using per-frame movement.
-        MoveFish();
+        //MoveFish();
     }
 
 
@@ -38,18 +38,22 @@ public class FishMovement : MonoBehaviour
     /// Use Unity's Input Manager system to move the fish in 4 cardinal directions
     ///    with WASD.
     /// </summary>
-    public void MoveFish()
+    public void MoveFish(Vector2 inputDirection)
     {
         // Grab the fish's current position as a locally-declared struct
         // such that it is modifiable.
         Vector3 fishPosition = fish.transform.position;
 
         // Local vector that represents direction
-        public Vector3 fishDirection = Vector3.zero;
+        Vector3 fishDirection = Vector3.zero;
+
+        // Get direction from the Value of the Vector2 based on what information is stored
+        //   within the ContextCallback Input Action
+
 
         // Move the jellyfish!
         // When the A key is pressed, move fish to the left
-        if (UnityEngine.Input.GetKey(KeyCode.A))				// Left
+        if (Input.GetKey(KeyCode.A))				            // Left
         {
             // Prove to ourselves that the key presses are working!
             UnityEngine.Debug.Log("Pressing A");
@@ -73,6 +77,32 @@ public class FishMovement : MonoBehaviour
             fishDirection = new Vector3(0, -1, 0);
             fishRotation = Quaternion.Euler(0, 0, 270);
         }
+
+        // Local velocity vector derived from direction * speed,
+        // accounting for time instead of per-frame movement
+        Vector3 velocity = fishDirection * speed;
+        velocity *= Time.deltaTime;
+        fishPosition += velocity;
+
+        // Transport the fish to that position
+        fish.transform.position = fishPosition;
+
+        // Rotate to face the direction it's moving
+        fish.transform.rotation = fishRotation;
+    }
+
+    public void SwimRight()
+    {
+        // Grab the fish's current position as a locally-declared struct
+        // such that it is modifiable.
+        Vector3 fishPosition = fish.transform.position;
+
+        // Local vector that represents direction
+        Vector3 fishDirection = Vector3.zero;
+
+        // Move the object a tiny unit right
+        fishDirection = new Vector3(1, 0, 0);
+        fishRotation = Quaternion.Euler(0, 0, 180);
 
         // Local velocity vector derived from direction * speed,
         // accounting for time instead of per-frame movement

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Vehicle : MonoBehaviour
 {
@@ -26,8 +27,7 @@ public class Vehicle : MonoBehaviour
     // ***
 
     // Fields for Input
-    [SerializeField]
-    private Vector3 movementDirection;
+    public Vector3 movementDirection;
 
     // Fields for Movement Vectors
     [SerializeField]
@@ -52,17 +52,42 @@ public class Vehicle : MonoBehaviour
 
     public void Move()
     {
-        // Movement "formula":
-        transform.forward = movementDirection;
+        // IF the gas is on
+        if (movementDirection.z != 0f)
+        {
+            // Movement "formula":
+            //transform.forward = movementDirection;
 
-        // Velocity is speed * direction - not scaled to a per-frame basis.
-        // It's on a per-second basis.
-        velocity = maxSpeed * movementDirection.normalized;
+            // accel 
+            acceleration = accelerationRate * movementDirection.z * transform.forward;
 
-        // Convert to a per-frame movement.
-        velocity *= Time.fixedDeltaTime;
+            // Velocity is speed * direction - not scaled to a per-frame basis.
+            // It's on a per-second basis.
+            // instant GO
+            // velocity = maxSpeed * movementDirection.normalized;
+            velocity += acceleration * Time.fixedDeltaTime;
+
+            // limit velocity based on maxSpeed
+            velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+        }
+        else // DECEL
+        {
+            velocity *= 1f - (decelerationRate * Time.fixedDeltaTime);
+
+            if(velocity.sqrMagnitude < minSpeed * minSpeed)
+            {
+                velocity = Vector3.zero;
+            }
+        }
 
         // Move the vehicle!
-        rBody.MovePosition(transform.position + velocity);
+        rBody.MovePosition(transform.position + velocity * Time.fixedDeltaTime);
+    }
+
+    public void OnMove(InputAction.CallbackContext callbackContext)
+    {
+        Vector2 inputDir = callbackContext.ReadValue<Vector2>();
+        movementDirection.z = inputDir.y;
+        movementDirection.x = inputDir.x;
     }
 }

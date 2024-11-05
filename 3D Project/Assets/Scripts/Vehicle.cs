@@ -27,7 +27,7 @@ public class Vehicle : MonoBehaviour
     */
 
     // Fields for Turning
-    [SerializeField, Tooltip("The # of degrees/second a moving vehicle can turn.")] float turnSpeed;
+    [SerializeField, Tooltip("The # of degrees/second a moving vehicle can turn.")] float turnRate;
 
     // ***
     // All remaining fields are private!
@@ -42,9 +42,8 @@ public class Vehicle : MonoBehaviour
     private Vector3 velocity;
     private Vector3 acceleration;
 
-    // Fields for Quaternions
-    private Quaternion turnAmount;
-
+    // Fields for rotation
+    private Quaternion rotDelta;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +59,10 @@ public class Vehicle : MonoBehaviour
 
     public void Move()
     {
+        Vector3 nextPosition = transform.position;
+        Quaternion nextRotation = transform.rotation;
+
+        #region Velocity Calcs
         // IF the gas is on
         if (movementDirection.z != 0f)
         {
@@ -95,9 +98,18 @@ public class Vehicle : MonoBehaviour
                 velocity = Vector3.zero;
             }
         }
+        #endregion
+
+        #region Rotation Calcs
+        // How much to turn by
+        float turnAmount = movementDirection.x * turnRate * Time.fixedDeltaTime;
+        rotDelta = Quaternion.Euler(0f, turnAmount, 0f);
+        #endregion
 
         // Move the vehicle!
-        rBody.MovePosition(transform.position + velocity * Time.fixedDeltaTime);
+        nextPosition += velocity * Time.fixedDeltaTime;
+        nextRotation *= rotDelta;
+        rBody.Move(nextPosition, nextRotation);
     }
 
     public void OnMove(InputAction.CallbackContext callbackContext)

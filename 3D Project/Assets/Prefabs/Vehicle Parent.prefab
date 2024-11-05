@@ -189,11 +189,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rBody: {fileID: 8369231134785715252}
-  maxSpeed: 40
+  maxSpeed: 10
   minSpeed: 2
   accelPercent: 0.507
   decelPercent: 0.69
-  turnSpeed: 25
+  turnRate: 20
 --- !u!1001 &5283775785229074708
 PrefabInstance:
   m_ObjectHideFlags: 0

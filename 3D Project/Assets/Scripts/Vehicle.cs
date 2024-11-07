@@ -45,6 +45,16 @@ public class Vehicle : MonoBehaviour
     // Fields for rotation
     private Quaternion rotDelta;
 
+    // Fields/properties that may help for rotation to terrain
+    // Track the vehicle forward too
+    private Vector3 VehicleForward { get; set; }
+    [SerializeField] Transform vehicleTransform;
+
+    // for demo, turn raycasting on/off
+    [SerializeField] bool isRaycasting = false;
+    [SerializeField] float maxTerrainHeight = 101f;
+    [SerializeField] LayerMask groundLayerMask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +71,19 @@ public class Vehicle : MonoBehaviour
     {
         Vector3 nextPosition = transform.position;
         Quaternion nextRotation = transform.rotation;
+
+        #region Raycasting
+        Vector3 origin = nextPosition;
+        origin.y = maxTerrainHeight;
+        RaycastHit terrainHit;
+        // if raycasting AND I hit something
+        if (isRaycasting && Physics.Raycast(origin, Vector3.down, out terrainHit, maxTerrainHeight, groundLayerMask))
+        {
+            nextPosition.y = terrainHit.point.y;
+            Vector3 normal = terrainHit.normal;
+        }
+
+        #endregion
 
         #region Velocity Calcs
         // IF the gas is on

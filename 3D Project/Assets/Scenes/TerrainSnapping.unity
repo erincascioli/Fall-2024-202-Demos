@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 1183746385}
   - component: {fileID: 1183746384}
   - component: {fileID: 1183746387}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,6 +335,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrain: {fileID: 1183746385}
   perlinStep: 0.0105
+--- !u!4 &2000090411 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5286527288020032310, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+  m_PrefabInstance: {fileID: 3152859133311616512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3152859133311616512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,6 +351,50 @@ PrefabInstance:
     - target: {fileID: 4833379443409091181, guid: e44938de1f8995847932bc73f4f31426, type: 3}
       propertyPath: m_Name
       value: Vehicle Parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286527288020032310, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286527288020032310, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286527288020032310, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286527288020032310, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5286527288020032310, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650346727730894334, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650346727730894334, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606912397345132063, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606912397345132063, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: isRaycasting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606912397345132063, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: vehicleTransform
+      value: 
+      objectReference: {fileID: 2000090411}
+    - target: {fileID: 8606912397345132063, guid: e44938de1f8995847932bc73f4f31426, type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8634764147319996994, guid: e44938de1f8995847932bc73f4f31426, type: 3}
       propertyPath: m_LocalPosition.x

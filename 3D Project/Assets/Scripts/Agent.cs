@@ -8,7 +8,12 @@ public abstract class Agent : MonoBehaviour
 {
     [SerializeField] float maxSpeed;
     [SerializeField] Rigidbody rBody;
-    public Vector3 velocity, acceleration; 
+    public Vector3 velocity, acceleration;
+
+    // Info to stay in bounds
+    [SerializeField] bool stayInBounds = false;
+    [SerializeField] Bounds bounds;
+    [SerializeField, Range(0, 1)] float stayInBoundsStrength = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +29,12 @@ public abstract class Agent : MonoBehaviour
 
         // Start with acceleration based on the steering force
         acceleration = CalcSteering();
+
+        // Add stay in bounds force if needed
+        if(stayInBounds)
+        {
+            acceleration += StayInBounds() * stayInBoundsStrength;
+        }
 
         // Calc velocity based on accel scaled by time
         velocity += acceleration * Time.fixedDeltaTime;
@@ -46,6 +57,17 @@ public abstract class Agent : MonoBehaviour
 
     protected abstract Vector3 CalcSteering();
 
+    protected Vector3 StayInBounds()
+    {
+        // Info we can use: bounding box, current position
+        if(!bounds.Contains(transform.position))
+        {
+            // if out of bounds
+            return Seek(bounds.center);
+        }
+        return Vector3.zero;
+    }
+
     protected Vector3 Seek(Vector3 targetPosition) 
     {
         // Calculate desired velocity
@@ -53,6 +75,11 @@ public abstract class Agent : MonoBehaviour
         Vector3 desiredVelocity = targetPosition - transform.position;
 
         // ** Let Agent FixedUpdate do this: Desired velocity must be scaled by maxSpeed
+        Vector3 opt1 = desiredVelocity.normalized * maxSpeed;
+         // OR
+        Vector3 opt2 = Vector3.ClampMagnitude(desiredVelocity, maxSpeed);
+
+        desiredVelocity = opt1;
 
         // Calculate the resultant steering force required to change a current
         // velocity to the desired velocity
@@ -70,7 +97,17 @@ public abstract class Agent : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        if (velocity.sqrMagnitude >= maxSpeed * maxSpeed)
+        {
+            Gizmos.color = Color.red;
+        }
+        else
+        {
+            Gizmos.color = Color.black;
+        }
         Gizmos.DrawRay(transform.position, velocity);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
     }
 }
